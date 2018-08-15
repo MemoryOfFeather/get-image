@@ -9,6 +9,7 @@ The main use is to automatically collect data sets used for machine learning.
 ```
 .
 ├── get_image.py
+└── README.md
 ```
 
 ## Usage
