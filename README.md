@@ -41,4 +41,4 @@ I do not assume any responsibility for copyright issues concerning image collect
 画像収集に関する著作権問題についての一切の責任を負いません.
 
 ## Author
-skcvim[https://github.com/skcvim]
+[skcvim](https://github.com/skcvim)
