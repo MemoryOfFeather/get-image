@@ -1,5 +1,3 @@
-# argv[1]:search target, argv[2]:amount of images
-
 import os
 import sys
 import json
@@ -13,15 +11,15 @@ class Google:
         self.GOOGLE_SEARCH_URL = 'https://www.google.co.jp/search'
         self.session = requests.session()
         self.session.headers.update(
-            {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0'})
+            {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0'})
 
     def search(self, keyword, maximum):
-        print('searching images :', keyword)
+        print('begin searching', keyword)
         query = self.query_gen(keyword)
         return self.image_search(query, maximum)
 
     def query_gen(self, keyword):
-        # 検索クエリジェネレータ
+        # search query generator
         page = 0
         while True:
             params = urllib.parse.urlencode({
@@ -33,18 +31,18 @@ class Google:
             page += 1
 
     def image_search(self, query_gen, maximum):
-        # 画像検索
+        # search image
         result = []
         total = 0
         while True:
-            # 検索
+            # search
             html = self.session.get(next(query_gen)).text
             soup = BeautifulSoup(html, 'lxml')
             elements = soup.select('.rg_meta.notranslate')
             jsons = [json.loads(e.get_text()) for e in elements]
             imageURLs = [js['ou'] for js in jsons]
 
-            # 検索結果の追加
+            # add search result
             if not len(imageURLs):
                 print('-> no more images')
                 break
@@ -55,7 +53,7 @@ class Google:
                 result += imageURLs
                 total += len(imageURLs)
 
-        print('-> finally got', str(len(result)), 'images')
+        print('-> found', str(len(result)), 'images')
         return result
 
 
@@ -65,15 +63,28 @@ if __name__ == '__main__':
         print('invalid argment')
         sys.exit()
     else:
-        # 保存先
+        # save location
+        name = sys.argv[1]
         data_dir = 'data/'
         os.makedirs(data_dir, exist_ok=True)
-        os.makedirs('data/' + sys.argv[1], exist_ok=True)
-        # 画像検索
-        result = google.search(
-            sys.argv[1], maximum=int(sys.argv[2]))
+        os.makedirs('data/' + name, exist_ok=True)
 
+        # search image
+        result = google.search(
+            name, maximum=int(sys.argv[2]))
+
+        # download
+        download_error = []
         for i in range(len(result)):
-            print('-> downloading image', i+1)
-            urllib.request.urlretrieve(
-                result[i], 'data/' + sys.argv[1] + '/' + str(i+1) + '.jpg')
+            print('-> downloading image', i + 1)
+            try:
+                urllib.request.urlretrieve(
+                    result[i], 'data/' + name + '/' + str(i + 1) + '.jpg')
+            except:
+                print('--> could not download this image', i + 1)
+                download_error.append(i + 1)
+                continue
+
+        print('complete download')
+        print('├─ download', len(result)-len(download_error), 'images')
+        print('└─ not download', len(download_error), 'images', download_error)
