@@ -1,6 +1,7 @@
-# get-image
+GET-IMAGE
+====
 
-## Overview
+# Overview
 Get Image From Google Image Search
 
 ## Description
@@ -38,3 +39,6 @@ If you deal with this source code, you can do it entirely freely.
 I do not assume any responsibility for copyright issues concerning image collection.
 
 画像収集に関する著作権問題についての一切の責任を負いません.
+
+## Author
+skcvim[https://github.com/skcvim]
