@@ -5,7 +5,7 @@ GET-IMAGE
 Get Image From Google Image Search
 
 ## Description
-You can get any number of arbitrary images from google image search.  
+You can get any number of arbitrary images from Google Image Search.  
 The main use is to automatically collect data sets used for machine learning.
 
 任意の枚数の任意の画像を Google 画像検索から得ることができます.  
