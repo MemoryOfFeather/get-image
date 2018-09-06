@@ -23,8 +23,8 @@ This code is written in `Python 3.6.6`.
 You need it and some modules like `os`, `sys`, `json`, `urllib`, `requests`, `bs4`.  
 If these environments are in place, I think that this program will work on any operating system.
 
-このコードは `Python 3.6.6` で書かれています.
-それに加えて `os`, `sys`, `json`, `urllib`, `requests`, `bs4` といったモジュールが必要です.
+このコードは `Python 3.6.6` で書かれています.  
+それに加えて `os`, `sys`, `json`, `urllib`, `requests`, `bs4` といったモジュールが必要です.  
 これらの環境が揃っていれば, このプログラムは任意のオペレーティングシステム上で動作すると思われます.
 
 ## Usage
